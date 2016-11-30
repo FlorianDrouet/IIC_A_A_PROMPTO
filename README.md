@@ -1,8 +1,8 @@
-*** Genie logiciel - M1 IIC-A - PROMPTO ***
-********************************************
+Genie logiciel - M1 IIC-A - PROMPTO
+===================================
 
 Tâches à faire (avancement)
-===========================
+---------------------------
  * WP1 (fait)
  * Base de données (fait)
  * Page d'accueil, template HTML/CSS/JS responsive (fait)
