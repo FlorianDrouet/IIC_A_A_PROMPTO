@@ -33,6 +33,14 @@
         <!-- Main JS -->
         <script src="js/main.js"></script>
         <script type="text/javascript">
+            function getCookie(sName) {
+                var oRegex = new RegExp("(?:; )?" + sName + "=([^;]*);?");
+         
+                if (oRegex.test(document.cookie)) 
+                    return decodeURIComponent(RegExp["$1"]);
+                else 
+                    return null;                
+            }
 
             function createCookie(name,value,days) {
                 if (days) {
@@ -50,7 +58,8 @@
                 createCookie('geolocation', pos.coords.longitude + '###___###' + pos.coords.latitude);
             }
 
-            navigator.geolocation.getCurrentPosition(maPosition);
+            if(getCookie('geolocation') == null && navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(maPosition);
         </script>
     </body>
 </html> 

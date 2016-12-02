@@ -1,3 +1,15 @@
+<?php 
+if(isset($_POST) && isset($_POST['submit_contact']))
+{
+	if(isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['message']) && !empty($_POST['message']))
+	{
+		// Envoie de l'email
+		$message_contact = "Le mail a bien été envoyé";
+	}
+	else
+		$message_contact = "Veuillez remplir tous les champs";
+}
+?>
 <section id="Contact">
 	<div id="fh5co-contact" class="fh5co-section-gray">
 		<div class="container">
@@ -6,7 +18,12 @@
 					<h3>Contact Information</h3>
 				</div>
 			</div>
-			<form action="#">
+			<?php if(isset($message_contact)) : ?>
+				<div class="row">
+					<p><?= $message_contact; ?></p>
+				</div>
+			<?php endif; ?>
+			<form action="" method="post">
 				<div class="row animate-box">
 					<div class="col-md-6">
 						<h3 class="section-title">Our Address</h3>
@@ -21,22 +38,22 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Name">
+									<input type="text" class="form-control" name="nom" placeholder="Votre nom">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Email">
+									<input type="text" class="form-control" name="email" placeholder="Votre email">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
+									<textarea name="" class="form-control" id="" cols="30" rows="7" name="message" placeholder="Message"></textarea>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="submit" value="Send Message" class="btn btn-primary">
+									<input type="submit" name="submit_contact" value="Nous contacter" class="btn btn-primary">
 								</div>
 							</div>
 						</div>
