@@ -14,6 +14,7 @@ Tâches à faire (avancement)
 |Système de notation                                    | fait          |
 |Remplir la BDD avec des données en exemple             | fait          |
 |Réduction du formulaire de connexion lors de la visite | fait          |
+|Géolocalisation automatique                            | fait          |
 |Messagerie interne                                     | en cours      |
-|Recherche "intelligente"                               | pas commencée |
+|Recherche "intelligente"                               | fait          |
 |Gestion du planning                                    | en cours      |
