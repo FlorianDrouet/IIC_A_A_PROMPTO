@@ -43,15 +43,19 @@ class Geoloc
 		$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
 		$url .= 'origins='.$this->lat.','.$this->long;
 		$url .= '&destinations='.$lat.','.$long;
+		$url .= '&key=AIzaSyDBc_ju59szL-GRwwdM3ZhWvakP8yl-q2c';
 
-		$json = json_decode(file_get_contents($url));
-
-		if($json->status == 'OK' && $json->rows[0]->elements[0]->status != 'ZERO_RESULTS')
+		$data = file_get_contents($url);
+		if($data)
 		{
-			return $json->rows[0]->elements[0]->distance->value;
+			$json = json_decode($data);
+
+			if($json->status == 'OK' && $json->rows[0]->elements[0]->status != 'ZERO_RESULTS')			
+				return $json->rows[0]->elements[0]->distance->value;
 		}
-		else return (acos( sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($long1 - $long2)))) ) * 6371;
-	}
+
+		return (acos( sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($long1 - $long2)))) ) * 6371;
+	}		
 
 	function distToStr($d)
 	{
