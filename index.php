@@ -11,38 +11,30 @@ require 'include/header.php';
 			<div class="desc">
 				<div class="container">
 					<div class="row">
-						<div class="desc2 ">
-							<div class="col-sm-8 col-md-7">
-								<div class="tabulation">  
-									<!-- Tab panes -->                
-									<div class="col-sm-12 mt">
-										<div class="input-field">
-											<input  type="text" class="form-control" id="email" placeholder="Quel service recherchez-vous ?" />
-										</div>
-									</div>
-									<div class="col-sm-12 mt">
-										<div class="input-field">
-											<input  type="text" class="form-control" id="email" placeholder="ville ou code postal" />
-										</div>
-									</div>
-									<div class="col-sm-12 mt">
-										<div class="input-field">
-											<div class="form-group">
-												<div class='input-group date' id='datetimepicker1'>
-													<input type='text' class="form-control" />
-													<span class="input-group-addon">
-														<span class="glyphicon glyphicon-calendar"></span>
-													</span>
-												</div>
+						<form method="GET" action="recherche.php">
+							<div class="desc2 ">
+								<div class="col-sm-8 col-md-7">
+									<div class="tabulation">  
+										<!-- Tab panes -->                
+										<div class="col-sm-12 mt">
+											<div class="input-field">
+												<input  type="text" class="form-control" id="service_id" name="service" onkeyup="autocomplet()" placeholder="Quel service recherchez-vous ?" />
+												<ul id="liste_service"></ul>
 											</div>
 										</div>
-									</div>
-									<div class="col-xs-12">
-										<input type="submit" class="btn btn-primary"  value="Search">
+										<div class="col-sm-12 mt">
+											<div class="input-field">
+												<input  type="text" class="form-control" id="service_region" name="region" onkeyup="autocomplet2()" placeholder="ville" />
+												<ul id="liste_region"></ul>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<input type="submit" class="btn btn-primary" value="Rechercher">
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</form>
 						<?php if(!isset($user)) : ?>
 						<div class="col-sm-5 col-md-5">
 							<div class="tabulation animate-box">

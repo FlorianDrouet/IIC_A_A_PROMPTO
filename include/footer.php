@@ -60,6 +60,47 @@
 
             if(getCookie('geolocation') == null && navigator.geolocation)
                 navigator.geolocation.getCurrentPosition(maPosition);
+
+            function autocomplet() {
+                var keyword = $('#service_id').val();
+                $.ajax({
+                    url: 'ajax_refresh.php',
+                    type: 'POST',
+                    data: {keyword:keyword},
+                    success:function(data){
+                        $('#liste_service').show();
+                        $('#liste_service').html(data);
+                    }
+                });
+            }
+
+            // set_item : this function will be executed when we select an item
+            function set_item(item) {
+                // change input value
+                $('#service_id').val(item);
+                // hide proposition list
+                $('#liste_service').hide();
+            }
+            function autocomplet2() {
+                var keyword = $('#service_region').val();
+                $.ajax({
+                    url: 'ajax_refresh2.php',
+                    type: 'POST',
+                    data: {keyword:keyword},
+                    success:function(data){
+                        $('#liste_region').show();
+                        $('#liste_region').html(data);
+                    }
+                });
+            }
+
+            // set_item : this function will be executed when we select an item
+            function set_item2(item) {
+                // change input value
+                $('#service_region').val(item);
+                // hide proposition list
+                $('#liste_region').hide();
+            }
         </script>
     </body>
 </html> 

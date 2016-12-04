@@ -81,12 +81,24 @@ require 'session.php'; ?><!DOCTYPE html>
 			.rating a:hover,
 			.rating a:focus,
 			.rating a:hover ~ a,
-			.rating a:focus ~ a {
+			.rating a:focus ~ a, 
+			.rating a.shine {
 				color: #1c1c1c;
 				cursor: pointer;
 			}
 
 			.case-studies-summary h4{color:#dedede;}
+
+			.searchResult{
+				display: none;
+				background : #dedede;
+				border : 1px solid #cbcbcb;
+				padding: 0;
+				width: 300px;
+				margin : 5px auto;
+			}
+			.searchResult li{list-style: none;}
+			.searchResult li:hover{background:white;}
 		</style>
 	</head>
 	<body>
@@ -99,6 +111,7 @@ require 'session.php'; ?><!DOCTYPE html>
 					<a class="navbar-brand" href="index.php#BonPlan">Bon Plans</a>
 					<a class="navbar-brand" href="index.php#Client">Avis</a>
 					<a class="navbar-brand" href="index.php#Contact">Contact</a>
+					<a class="navbar-brand" href="recherche.php">Recherche</a>
 				</div>
 				<?php if(!isset($user)) : ?>
 				<form id="signin" class="navbar-form navbar-right" role="form" method="POST" action="login.php">
