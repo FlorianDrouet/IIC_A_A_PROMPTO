@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
--- Client: localhost
--- Généré le: Sam 03 Décembre 2016 à 15:22
--- Version du serveur: 5.5.24-log
--- Version de PHP: 5.4.3
+-- Client :  127.0.0.1
+-- Généré le :  Dim 04 Décembre 2016 à 10:24
+-- Version du serveur :  5.7.14
+-- Version de PHP :  5.6.25
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données: `genie_logiciel`
+-- Base de données :  `genie_logiciel`
 --
 
 -- --------------------------------------------------------
@@ -26,12 +26,11 @@ SET time_zone = "+00:00";
 -- Structure de la table `categorie`
 --
 
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `id_categorie` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorie` (
+  `id_categorie` int(20) NOT NULL,
   `nom_categ` varchar(20) NOT NULL,
-  `parent_categ` int(2) NOT NULL,
-  PRIMARY KEY (`id_categorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+  `parent_categ` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `categorie`
@@ -54,13 +53,12 @@ INSERT INTO `categorie` (`id_categorie`, `nom_categ`, `parent_categ`) VALUES
 -- Structure de la table `membre`
 --
 
-CREATE TABLE IF NOT EXISTS `membre` (
+CREATE TABLE `membre` (
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
   `type` varchar(20) NOT NULL,
   `mail` varchar(80) NOT NULL,
-  `passe` varchar(80) NOT NULL,
-  PRIMARY KEY (`mail`)
+  `passe` varchar(80) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -83,14 +81,13 @@ INSERT INTO `membre` (`nom`, `prenom`, `type`, `mail`, `passe`) VALUES
 -- Structure de la table `message`
 --
 
-CREATE TABLE IF NOT EXISTS `message` (
-  `id_message` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `message` (
+  `id_message` int(20) NOT NULL,
   `message` text NOT NULL,
-  `pseudo` varchar(20) NOT NULL,
+  `pseudo` varchar(80) NOT NULL,
   `destinataire` varchar(20) NOT NULL,
-  `etat` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_message`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  `etat` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `message`
@@ -103,8 +100,10 @@ INSERT INTO `message` (`id_message`, `message`, `pseudo`, `destinataire`, `etat`
 (4, 'message 4', '<br /><b>Notice</b>:', 'x', 0),
 (7, '“Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.”', 'aghiles__medjbour@ho', 'x', 0),
 (8, 'Génie logiciel, IIC_A_A_PROMPTO', 'aghiles_medjbour@hot', 'y', 0),
-(9, 'J''aimerai bien avoir un sevice de plomberie pour cette après midi 16h', 'ghiles.amara@outlook', 'z', 0),
-(10, 'Le coiffeur que vous m''avez envvoyé manque de patience pour le métier.  ', 'kam_amez@gmail.com', 'w', 0);
+(9, 'J\'aimerai bien avoir un sevice de plomberie pour cette après midi 16h', 'ghiles.amara@outlook', 'z', 0),
+(10, 'Le coiffeur que vous m\'avez envvoyé manque de patience pour le métier.  ', 'kam_amez@gmail.com', 'w', 0),
+(11, 'test', 'jourdain.stevens@gmail.com', 'Coiffeur', 0),
+(12, 'test', 'jourdain.stevens@gmail.com', 'Coiffeuse', 0);
 
 -- --------------------------------------------------------
 
@@ -112,12 +111,11 @@ INSERT INTO `message` (`id_message`, `message`, `pseudo`, `destinataire`, `etat`
 -- Structure de la table `note`
 --
 
-CREATE TABLE IF NOT EXISTS `note` (
-  `id_note` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `note` (
+  `id_note` int(20) NOT NULL,
   `id_service` varchar(20) NOT NULL,
-  `note` varchar(5) NOT NULL,
-  PRIMARY KEY (`id_note`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `note` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `note`
@@ -125,7 +123,10 @@ CREATE TABLE IF NOT EXISTS `note` (
 
 INSERT INTO `note` (`id_note`, `id_service`, `note`) VALUES
 (1, '1', '4'),
-(2, '1', '4');
+(2, '1', '4'),
+(3, '5', '4'),
+(4, '5', '4'),
+(5, '5', '2');
 
 -- --------------------------------------------------------
 
@@ -133,16 +134,15 @@ INSERT INTO `note` (`id_note`, `id_service`, `note`) VALUES
 -- Structure de la table `service`
 --
 
-CREATE TABLE IF NOT EXISTS `service` (
-  `id_service` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `service` (
+  `id_service` int(20) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `description` varchar(70) NOT NULL,
   `categorie` int(11) NOT NULL,
   `longitude` double NOT NULL,
   `lattitude` double NOT NULL,
-  `region` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_service`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+  `region` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `service`
@@ -171,6 +171,64 @@ INSERT INTO `service` (`id_service`, `nom`, `description`, `categorie`, `longitu
 (23, 'Jardinier A', '', 21, 9.242, 78.244, ''),
 (24, 'Jardinier B', '', 21, 7.242, 2.3234, '');
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id_categorie`);
+
+--
+-- Index pour la table `membre`
+--
+ALTER TABLE `membre`
+  ADD PRIMARY KEY (`mail`);
+
+--
+-- Index pour la table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id_message`);
+
+--
+-- Index pour la table `note`
+--
+ALTER TABLE `note`
+  ADD PRIMARY KEY (`id_note`);
+
+--
+-- Index pour la table `service`
+--
+ALTER TABLE `service`
+  ADD PRIMARY KEY (`id_service`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id_categorie` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT pour la table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id_message` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT pour la table `note`
+--
+ALTER TABLE `note`
+  MODIFY `id_note` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `service`
+--
+ALTER TABLE `service`
+  MODIFY `id_service` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
