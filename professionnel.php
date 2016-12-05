@@ -89,7 +89,7 @@
 
     <!-- end:header-top -->
   <div class="col-md-3" style="padding-top: 2cm">
-<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23ff6600&amp;ctz=Europe%2FParis" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23ff6600&amp;ctz=Europe%2FParis&src=0vbnir6qjaui60vhlbdpulrbbk@group.calendar.google.com" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 </div>
 
   <script src="js/jquery.min.js"></script>

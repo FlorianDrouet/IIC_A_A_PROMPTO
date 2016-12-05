@@ -62,6 +62,8 @@ require 'session.php'; ?><!DOCTYPE html>
 		<link rel="stylesheet" href="css/cs-skin-border.css">
 		<link rel="stylesheet" href="css/style.css">
 
+    	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css" type="text/css" rel="stylesheet" />
+
 		<!-- Modernizr JS -->
 		<script src="js/modernizr-2.6.2.min.js"></script>
 		<!-- FOR IE9 below -->
