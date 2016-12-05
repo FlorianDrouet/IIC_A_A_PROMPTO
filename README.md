@@ -15,6 +15,14 @@ Tâches à faire (avancement)
 |Remplir la BDD avec des données en exemple             | fait          |
 |Réduction du formulaire de connexion lors de la visite | fait          |
 |Géolocalisation automatique                            | fait          |
-|Messagerie interne                                     | en cours      |
+|Messagerie interne                                     | fait          |
 |Recherche "intelligente"                               | fait          |
-|Gestion du planning                                    | en cours      |
+|Affichage du planning                                  | fait          |
+|Système de notification de nouveaux messages           | pas commencé  |
+|Pouvoir réserver un créneau                            | pas commencé  |
+|Synchronisation planning google agenda                 | pas commencé  |
+|Formulaire pour agenda son google agenda               | pas commencé  |
+|Recherche en fonction de la date                       | pas commencé  |
+|Recherche en fonction de la géolocalisation            | fait          |
+|Mini chat instantanée                                  | en cours      |
+|Modification système de notification                   | fait          |

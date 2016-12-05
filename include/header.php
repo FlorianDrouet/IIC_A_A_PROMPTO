@@ -62,6 +62,8 @@ require 'session.php'; ?><!DOCTYPE html>
 		<link rel="stylesheet" href="css/cs-skin-border.css">
 		<link rel="stylesheet" href="css/style.css">
 
+    	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css" type="text/css" rel="stylesheet" />
+
 		<!-- Modernizr JS -->
 		<script src="js/modernizr-2.6.2.min.js"></script>
 		<!-- FOR IE9 below -->
@@ -78,15 +80,28 @@ require 'session.php'; ?><!DOCTYPE html>
 				font-size: 2em;
 				transition: color .4s;
 			}
-			.rating a:hover,
-			.rating a:focus,
-			.rating a:hover ~ a,
-			.rating a:focus ~ a {
+			.rating a.shine {color: #1c1c1c;}
+			.rating.notable a:hover,
+			.rating.notable a:focus,
+			.rating.notable a:hover ~ a,
+			.rating.notable a:focus ~ a, 
+			.rating.notable a.shine {
 				color: #1c1c1c;
 				cursor: pointer;
 			}
 
 			.case-studies-summary h4{color:#dedede;}
+
+			.searchResult{
+				display: none;
+				background : #dedede;
+				border : 1px solid #cbcbcb;
+				padding: 0;
+				width: 300px;
+				margin : 5px auto;
+			}
+			.searchResult li{list-style: none;}
+			.searchResult li:hover{background:white;}
 		</style>
 	</head>
 	<body>
@@ -99,6 +114,7 @@ require 'session.php'; ?><!DOCTYPE html>
 					<a class="navbar-brand" href="index.php#BonPlan">Bon Plans</a>
 					<a class="navbar-brand" href="index.php#Client">Avis</a>
 					<a class="navbar-brand" href="index.php#Contact">Contact</a>
+					<a class="navbar-brand" href="recherche.php">Recherche</a>
 				</div>
 				<?php if(!isset($user)) : ?>
 				<form id="signin" class="navbar-form navbar-right" role="form" method="POST" action="login.php">
@@ -111,6 +127,7 @@ require 'session.php'; ?><!DOCTYPE html>
 						<input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">                                        
 					</div>
 					<button type="submit" class="btn btn-primary">Login</button>
+					<a href="creerCompte.php" class="btn btn-primary">Créer un compte</a>
 				</form>
 				<?php else : ?>
 					<div class="navbar-header navbar-right">						
