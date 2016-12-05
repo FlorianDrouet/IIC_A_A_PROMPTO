@@ -5,7 +5,7 @@ require 'include/header.php';
 if(isset($_GET['service']))
 {
 	$service = '%'.$_GET['service'].'%';
-	$sql = "SELECT * FROM service WHERE (nom LIKE (:service) AND nom != '') AND (lattitude > :lat -1 AND lattitude < :lat +1) AND (longitude > :long -1 AND longitude < :long +1)";
+	$sql = "SELECT s.* FROM service AS s LEFT JOIN categorie AS c ON c.id_categorie = s.categorie WHERE c.nom_categ LIKE (:service) AND (s.lattitude > :lat -1 AND s.lattitude < :lat +1) AND (s.longitude > :long -1 AND s.longitude < :long +1)";
 	$query = $bdd->prepare($sql);
 	$query->bindParam(':service', $service, PDO::PARAM_STR);
 	$query->bindParam(':lat', $geolocalisation->lat);
