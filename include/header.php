@@ -126,6 +126,7 @@ require 'session.php'; ?><!DOCTYPE html>
 						<input id="password" type="password" class="form-control" name="password" value="" placeholder="Password">                                        
 					</div>
 					<button type="submit" class="btn btn-primary">Login</button>
+					<a href="creerCompte.php" class="btn btn-primary">Créer un compte</a>
 				</form>
 				<?php else : ?>
 					<div class="navbar-header navbar-right">						
