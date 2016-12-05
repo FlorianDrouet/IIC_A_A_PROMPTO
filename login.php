@@ -37,7 +37,7 @@ if(isset($_POST))
             $_SESSION['user'] = $_POST['email'].'###___###'.$_POST['password'];
 
             if ($data['type'] == 'p')						
-                header('Location: add_services.php');			
+                header('Location: client.php');			
             else				
                 header('Location: index.php');
         }
