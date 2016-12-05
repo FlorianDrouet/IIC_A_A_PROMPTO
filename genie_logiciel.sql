@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 04 Décembre 2016 à 10:24
+-- Généré le :  Lun 05 Décembre 2016 à 17:57
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -46,6 +46,52 @@ INSERT INTO `categorie` (`id_categorie`, `nom_categ`, `parent_categ`) VALUES
 (20, 'Plomberie', 0),
 (21, 'Jardinage', 0),
 (22, 'Eléctricité ', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `chat_pages`
+--
+
+CREATE TABLE `chat_pages` (
+  `page_id` tinyint(5) NOT NULL,
+  `group_id` tinyint(5) DEFAULT '0',
+  `description` tinytext NOT NULL,
+  `page` varchar(100) NOT NULL DEFAULT '',
+  `start_time` time NOT NULL DEFAULT '00:00:00',
+  `end_time` time NOT NULL DEFAULT '00:00:00',
+  `days_of_week` set('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') NOT NULL DEFAULT ''
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `chat_transcript`
+--
+
+CREATE TABLE `chat_transcript` (
+  `transcript_id` tinyint(5) NOT NULL,
+  `user_id` tinyint(5) NOT NULL DEFAULT '0',
+  `page_id` tinyint(5) NOT NULL DEFAULT '0',
+  `text` text NOT NULL,
+  `timestamp` int(14) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `chat_users`
+--
+
+CREATE TABLE `chat_users` (
+  `user_id` tinyint(5) NOT NULL,
+  `group_id` tinyint(5) DEFAULT '0',
+  `nickname` varchar(25) NOT NULL DEFAULT '',
+  `email` varchar(75) NOT NULL DEFAULT '',
+  `ipaddress` varchar(20) NOT NULL DEFAULT '',
+  `loggedin` enum('yes','no') NOT NULL DEFAULT 'no',
+  `last_login` int(14) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -182,6 +228,24 @@ ALTER TABLE `categorie`
   ADD PRIMARY KEY (`id_categorie`);
 
 --
+-- Index pour la table `chat_pages`
+--
+ALTER TABLE `chat_pages`
+  ADD PRIMARY KEY (`page_id`);
+
+--
+-- Index pour la table `chat_transcript`
+--
+ALTER TABLE `chat_transcript`
+  ADD PRIMARY KEY (`transcript_id`);
+
+--
+-- Index pour la table `chat_users`
+--
+ALTER TABLE `chat_users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- Index pour la table `membre`
 --
 ALTER TABLE `membre`
@@ -214,6 +278,21 @@ ALTER TABLE `service`
 --
 ALTER TABLE `categorie`
   MODIFY `id_categorie` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT pour la table `chat_pages`
+--
+ALTER TABLE `chat_pages`
+  MODIFY `page_id` tinyint(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `chat_transcript`
+--
+ALTER TABLE `chat_transcript`
+  MODIFY `transcript_id` tinyint(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `chat_users`
+--
+ALTER TABLE `chat_users`
+  MODIFY `user_id` tinyint(5) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `message`
 --
