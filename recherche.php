@@ -42,6 +42,7 @@ require 'modules/notation/notation.php';
 								<div class="col-md-offset-2" style="padding-top: 1cm">
 									<label style="color: white"><?= $rs['nom']; ?></label><br>							
 									<label style="color: white"><?= $rs['region']; ?></label><br>
+									<label style="color: white"><?= $geolocalisation->distToStr($geolocalisation->distance($rs['longitude'], $rs['lattitude'])); ?></label><br>								
 									<label style="color: white"><?= $rs['description']; ?></label><br>
 									
 									<a class="btn btn-primary btn-outline" <?= !isset($user) ? 'onclick="alert(\'Veuillez vous connecter.\'); return false;"' : ''; ?> href="#">Prendre un rendez-vous <i class="icon-arrow-right22"></i></a>
