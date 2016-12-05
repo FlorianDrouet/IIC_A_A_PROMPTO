@@ -1,5 +1,5 @@
 <?php 
-function afficherNote($id)
+function afficherNote($id, $notable)
 {
 	global $bdd;
 	try
@@ -22,11 +22,20 @@ function afficherNote($id)
 	}
 	$moy = $nbNotes == 0 ? 0 : round($somme / $nbNotes);
 
-	echo '<div class="rating">';
-	for($i = 5; $i > $moy; $i--)	
-		echo '<!----><a href="modules/notation/ajouterNote.php?note='.$i.'&amp;id_service='.$id.'" title="Donner '.$i.' étoiles">☆</a>';	
-	for($i = $moy; $i > 0; $i--)	
-		echo '<!----><a href="modules/notation/ajouterNote.php?note='.$i.'&amp;id_service='.$id.'" title="Donner '.$i.' étoiles" class="shine">☆</a>';
+	echo '<div class="rating '.($notable ? 'notable' : '').'">';
+	for($i = 5; $i > $moy; $i--){
+		if($notable)
+			echo '<!----><a href="modules/notation/ajouterNote.php?note='.$i.'&amp;id_service='.$id.'" title="Donner '.$i.' étoiles">☆</a>';	
+		else
+			echo '<!----><a>☆</a>';	
+	}
+	for($i = $moy; $i > 0; $i--)
+	{
+		if($notable)
+			echo '<!----><a class="shine" href="modules/notation/ajouterNote.php?note='.$i.'&amp;id_service='.$id.'" title="Donner '.$i.' étoiles">☆</a>';	
+		else
+			echo '<!----><a class="shine">☆</a>';
+	}
 
 	echo '</div>';
 }

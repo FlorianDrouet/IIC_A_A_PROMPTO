@@ -80,11 +80,12 @@ require 'session.php'; ?><!DOCTYPE html>
 				font-size: 2em;
 				transition: color .4s;
 			}
-			.rating a:hover,
-			.rating a:focus,
-			.rating a:hover ~ a,
-			.rating a:focus ~ a, 
-			.rating a.shine {
+			.rating a.shine {color: #1c1c1c;}
+			.rating.notable a:hover,
+			.rating.notable a:focus,
+			.rating.notable a:hover ~ a,
+			.rating.notable a:focus ~ a, 
+			.rating.notable a.shine {
 				color: #1c1c1c;
 				cursor: pointer;
 			}

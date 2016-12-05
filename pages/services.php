@@ -43,6 +43,15 @@ foreach($all_services AS $d => $array)
 	<div id="fh5co-destination">
 		<div class="tour-fluid">
 			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">				
+					<form action="recherche.php" method="GET">
+						<input type="text" name="service" placeholder="Service" id="service_id" onkeyup="autocomplet()">
+		                    <ul id="liste_service" class="searchResult"></ul>
+						<button type="submit">Rechercher</button>
+					</form>
+				</div>						
+			</div>	
+			<div class="row">
 				<div class="col-md-12">
 					<ul id="fh5co-destination-list" class="animate-box">
 						<?php 
