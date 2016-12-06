@@ -61,6 +61,7 @@ require 'session.php'; ?><!DOCTYPE html>
 		<link rel="stylesheet" href="css/cs-select.css">
 		<link rel="stylesheet" href="css/cs-skin-border.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="chat/chat.css"/>
 
     	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css" type="text/css" rel="stylesheet" />
 

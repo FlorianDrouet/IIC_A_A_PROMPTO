@@ -1,3 +1,4 @@
+            <?php include 'chat/chat.php'; ?>
             </div>
             <!-- END fh5co-page -->
         </div>

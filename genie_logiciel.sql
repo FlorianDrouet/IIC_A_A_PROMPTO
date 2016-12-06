@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.4deb1
+-- https://www.phpmyadmin.net/
 --
--- Client: localhost
--- Généré le: Mar 06 Décembre 2016 à 16:56
--- Version du serveur: 5.5.24-log
--- Version de PHP: 5.4.3
+-- Client :  localhost:3306
+-- Généré le :  Mar 06 Décembre 2016 à 20:00
+-- Version du serveur :  5.7.16-0ubuntu0.16.10.1
+-- Version de PHP :  7.0.8-3ubuntu3
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données: `genie_logiciel`
+-- Base de données :  `genie_logiciel`
 --
 
 -- --------------------------------------------------------
@@ -26,10 +26,9 @@ SET time_zone = "+00:00";
 -- Structure de la table `bon_plan`
 --
 
-CREATE TABLE IF NOT EXISTS `bon_plan` (
-  `id_service` int(20) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id_service`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+CREATE TABLE `bon_plan` (
+  `id_service` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -37,12 +36,11 @@ CREATE TABLE IF NOT EXISTS `bon_plan` (
 -- Structure de la table `categorie`
 --
 
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `id_categorie` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorie` (
+  `id_categorie` int(20) NOT NULL,
   `nom_categ` varchar(20) NOT NULL,
-  `parent_categ` int(2) NOT NULL,
-  PRIMARY KEY (`id_categorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65 ;
+  `parent_categ` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `categorie`
@@ -101,59 +99,10 @@ INSERT INTO `categorie` (`id_categorie`, `nom_categ`, `parent_categ`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chat_pages`
---
-
-CREATE TABLE IF NOT EXISTS `chat_pages` (
-  `page_id` tinyint(5) NOT NULL AUTO_INCREMENT,
-  `group_id` tinyint(5) DEFAULT '0',
-  `description` tinytext NOT NULL,
-  `page` varchar(100) NOT NULL DEFAULT '',
-  `start_time` time NOT NULL DEFAULT '00:00:00',
-  `end_time` time NOT NULL DEFAULT '00:00:00',
-  `days_of_week` set('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') NOT NULL DEFAULT '',
-  PRIMARY KEY (`page_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `chat_transcript`
---
-
-CREATE TABLE IF NOT EXISTS `chat_transcript` (
-  `transcript_id` tinyint(5) NOT NULL AUTO_INCREMENT,
-  `user_id` tinyint(5) NOT NULL DEFAULT '0',
-  `page_id` tinyint(5) NOT NULL DEFAULT '0',
-  `text` text NOT NULL,
-  `timestamp` int(14) NOT NULL,
-  PRIMARY KEY (`transcript_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `chat_users`
---
-
-CREATE TABLE IF NOT EXISTS `chat_users` (
-  `user_id` tinyint(5) NOT NULL AUTO_INCREMENT,
-  `group_id` tinyint(5) DEFAULT '0',
-  `nickname` varchar(25) NOT NULL DEFAULT '',
-  `email` varchar(75) NOT NULL DEFAULT '',
-  `ipaddress` varchar(20) NOT NULL DEFAULT '',
-  `loggedin` enum('yes','no') NOT NULL DEFAULT 'no',
-  `last_login` int(14) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `config_general`
 --
 
-CREATE TABLE IF NOT EXISTS `config_general` (
+CREATE TABLE `config_general` (
   `nom` varchar(20) NOT NULL,
   `valeur` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -164,14 +113,13 @@ CREATE TABLE IF NOT EXISTS `config_general` (
 -- Structure de la table `membre`
 --
 
-CREATE TABLE IF NOT EXISTS `membre` (
+CREATE TABLE `membre` (
   `id_membre` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
   `type` varchar(20) NOT NULL,
   `mail` varchar(80) NOT NULL,
-  `passe` varchar(80) NOT NULL,
-  PRIMARY KEY (`id_membre`)
+  `passe` varchar(80) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -194,30 +142,20 @@ INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `type`, `mail`, `passe`) VAL
 -- Structure de la table `message`
 --
 
-CREATE TABLE IF NOT EXISTS `message` (
-  `id_message` int(20) NOT NULL AUTO_INCREMENT,
-  `message` text NOT NULL,
-  `pseudo` varchar(80) NOT NULL,
-  `destinataire` varchar(20) NOT NULL,
-  `etat` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_message`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+CREATE TABLE `message` (
+  `ID` int(20) NOT NULL,
+  `Pseudo` varchar(20) NOT NULL,
+  `Message` varchar(20) NOT NULL,
+  `Date` datetime NOT NULL,
+  `destination` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `message`
 --
 
-INSERT INTO `message` (`id_message`, `message`, `pseudo`, `destinataire`, `etat`) VALUES
-(1, 'message 1', 'jawhersaidane94@gmai', 'x', 0),
-(2, 'message 2 ', 'jawhersaidane94@gmai', 'x', 0),
-(3, 'message 3', '<br /><b>Notice</b>:', 'x', 0),
-(4, 'message 4', '<br /><b>Notice</b>:', 'x', 0),
-(7, '“Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.”', 'aghiles__medjbour@ho', 'x', 0),
-(8, 'Génie logiciel, IIC_A_A_PROMPTO', 'aghiles_medjbour@hot', 'y', 0),
-(9, 'J''aimerai bien avoir un sevice de plomberie pour cette après midi 16h', 'ghiles.amara@outlook', 'z', 0),
-(10, 'Le coiffeur que vous m''avez envvoyé manque de patience pour le métier.  ', 'kam_amez@gmail.com', 'w', 0),
-(11, 'test', 'jourdain.stevens@gmail.com', 'Coiffeur', 0),
-(12, 'test', 'jourdain.stevens@gmail.com', 'Coiffeuse', 0);
+INSERT INTO `message` (`ID`, `Pseudo`, `Message`, `Date`, `destination`) VALUES
+(1, 'stevens', 'gfgf', '2016-12-06 19:49:51', 'test');
 
 -- --------------------------------------------------------
 
@@ -225,25 +163,24 @@ INSERT INTO `message` (`id_message`, `message`, `pseudo`, `destinataire`, `etat`
 -- Structure de la table `note`
 --
 
-CREATE TABLE IF NOT EXISTS `note` (
-  `id_note` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `note` (
+  `id_note` int(20) NOT NULL,
   `id_membre` int(11) NOT NULL,
   `id_service` varchar(20) NOT NULL,
   `note` varchar(5) NOT NULL,
-  `commentaire` text NOT NULL,
-  PRIMARY KEY (`id_note`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `commentaire` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `note`
 --
 
 INSERT INTO `note` (`id_note`, `id_membre`, `id_service`, `note`, `commentaire`) VALUES
-(1, 0, '1', '4', 'Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l''imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.'),
+(1, 0, '1', '4', 'Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.'),
 (2, 0, '1', '4', 'On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. '),
-(3, 0, '5', '4', 'Contrairement à une opinion répandue, le Lorem Ipsum n''est pas simplement du texte aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine classique datant de 45 av. J.-C., le rendant vieux de 2000 ans.'),
-(4, 0, '5', '4', 'Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d''entre elles a été altérée par l''addition d''humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard.'),
-(5, 0, '5', '2', 'L''extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle est reproduit ci-dessous pour les curieux. Les sections 1.10.32 et 1.10.33 du "De Finibus Bonorum et Malorum" de Cicéron sont aussi reproduites dans leur version originale, accompagnée de la traduction anglaise de H. Rackham (1914).');
+(3, 0, '5', '4', 'Contrairement à une opinion répandue, le Lorem Ipsum n\'est pas simplement du texte aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine classique datant de 45 av. J.-C., le rendant vieux de 2000 ans.'),
+(4, 0, '5', '4', 'Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d\'entre elles a été altérée par l\'addition d\'humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard.'),
+(5, 0, '5', '2', 'L\'extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle est reproduit ci-dessous pour les curieux. Les sections 1.10.32 et 1.10.33 du "De Finibus Bonorum et Malorum" de Cicéron sont aussi reproduites dans leur version originale, accompagnée de la traduction anglaise de H. Rackham (1914).');
 
 -- --------------------------------------------------------
 
@@ -251,16 +188,15 @@ INSERT INTO `note` (`id_note`, `id_membre`, `id_service`, `note`, `commentaire`)
 -- Structure de la table `service`
 --
 
-CREATE TABLE IF NOT EXISTS `service` (
-  `id_service` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `service` (
+  `id_service` int(20) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `description` varchar(70) NOT NULL,
   `categorie` int(11) NOT NULL,
   `longitude` double NOT NULL,
   `lattitude` double NOT NULL,
-  `region` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_service`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+  `region` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `service`
@@ -289,6 +225,75 @@ INSERT INTO `service` (`id_service`, `nom`, `description`, `categorie`, `longitu
 (23, 'Jardinier A', '', 21, 9.242, 78.244, ''),
 (24, 'Jardinier B', '', 21, 7.242, 2.3234, '');
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `bon_plan`
+--
+ALTER TABLE `bon_plan`
+  ADD PRIMARY KEY (`id_service`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id_categorie`);
+
+--
+-- Index pour la table `membre`
+--
+ALTER TABLE `membre`
+  ADD PRIMARY KEY (`id_membre`);
+
+--
+-- Index pour la table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `note`
+--
+ALTER TABLE `note`
+  ADD PRIMARY KEY (`id_note`);
+
+--
+-- Index pour la table `service`
+--
+ALTER TABLE `service`
+  ADD PRIMARY KEY (`id_service`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `bon_plan`
+--
+ALTER TABLE `bon_plan`
+  MODIFY `id_service` int(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id_categorie` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+--
+-- AUTO_INCREMENT pour la table `message`
+--
+ALTER TABLE `message`
+  MODIFY `ID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `note`
+--
+ALTER TABLE `note`
+  MODIFY `id_note` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `service`
+--
+ALTER TABLE `service`
+  MODIFY `id_service` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
