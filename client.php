@@ -4,7 +4,7 @@ require 'include/header.php'; ?>
 <div id="fh5co-car" class="fh5co-section-gray">
     <div class="container" style="padding-top: 70px">
         <div class="row">
-            <div class="col-xs-12">                
+            <center>               
                 <div class="input-field">
                     <label for="date-start">Choix horaire</label>
                     <select name="heure">
@@ -21,8 +21,8 @@ require 'include/header.php'; ?>
                         <?php endfor; ?>
                     </select>
                 </div>
-                <input type="submit" class="btn btn-primary btn-block" value="Go">
-           </div>
+                <input type="submit" class="btn btn-primary btn-block" value="Valider le rendez-vous">
+            </center>
         </div>
         <div class="row" style="margin-top:20px;">
             <div class="col-xs-12">
