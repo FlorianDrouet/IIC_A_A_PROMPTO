@@ -43,7 +43,7 @@ class Geoloc
 		$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
 		$url .= 'origins='.$this->lat.','.$this->long;
 		$url .= '&destinations='.$lat.','.$long;
-		$url .= '&key=AIzaSyDBc_ju59szL-GRwwdM3ZhWvakP8yl-q2c';
+		$url .= '&key=AIzaSyCpBNazBlcBOS5-0vshJT2ycYqJGcozD7U';
 
 		$data = file_get_contents($url);
 		if($data)
