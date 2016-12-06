@@ -30,6 +30,9 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
         <script src="js/google_map.js"></script>
 
+        <!-- Modernizr JS -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+
         <!-- Main JS -->
         <script src="js/main.js"></script>
 
