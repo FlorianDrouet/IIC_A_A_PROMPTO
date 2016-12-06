@@ -7,17 +7,22 @@
 				</div>
 			</div>
 			<div class="row">
-			<?php for($i = 0; $i < 3; $i++) : ?>
+			<?php 
+			$req = $bdd->prepare('SELECT c.nom_categ, s.nom, n.commentaire FROM categorie AS c LEFT JOIN service AS s ON s.categorie = c.id_categorie LEFT JOIN note AS n ON n.id_service = s.id_service ORDER BY id_note DESC LIMIT 3');
+			$req->execute();
+
+			$i = 0;
+			while($res = $req->fetch(PDO::FETCH_ASSOC)) : ++$i; ?>
 				<div class="col-md-4">
 					<div class="box-testimony animate-box">
 						<blockquote>
 							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
-							<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+							<p>&ldquo;<?= reduireText($res['commentaire']); ?>&rdquo;</p>
 						</blockquote>
-						<p class="author">John Doe, CEO <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
+						<p class="author"><?= $res['nom']; ?> <span class="subtext"><?= $res['nom_categ']; ?></span></p>
 					</div>
 				</div>
-			<?php endfor; ?>
+			<?php endwhile; ?>
 			</div>
 		</div>
 	</div>
