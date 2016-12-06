@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 05 Décembre 2016 à 22:01
+-- Généré le: Mar 06 Décembre 2016 à 16:56
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `nom_categ` varchar(20) NOT NULL,
   `parent_categ` int(2) NOT NULL,
   PRIMARY KEY (`id_categorie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65 ;
 
 --
 -- Contenu de la table `categorie`
@@ -57,7 +57,46 @@ INSERT INTO `categorie` (`id_categorie`, `nom_categ`, `parent_categ`) VALUES
 (19, 'Bricolage', 0),
 (20, 'Plomberie', 0),
 (21, 'Jardinage', 0),
-(22, 'Eléctricité ', 0);
+(22, 'Eléctricité ', 0),
+(23, 'Coiffeur', 9),
+(24, 'Esthéticienne', 9),
+(25, 'Ongelerie', 9),
+(26, 'Maquillage', 9),
+(27, 'Massage', 9),
+(28, 'Epilation', 9),
+(30, 'Médecin générale', 10),
+(31, 'Médecin spécialisée', 10),
+(32, 'Hôpital à domicile ', 10),
+(33, 'Soin à domicile ', 10),
+(34, 'Fast food', 17),
+(35, 'Kebab', 17),
+(36, 'Pizza Italienne', 17),
+(37, 'Shandwich Maghrébin', 17),
+(38, 'Gastronomie français', 17),
+(39, 'Cuisine Thailandaise', 17),
+(40, 'Cuisine chinoise ', 17),
+(41, 'Cuisine russe', 17),
+(42, 'Taxi', 18),
+(43, 'Bus', 18),
+(44, 'Location de voiture ', 18),
+(46, 'Location de camion', 18),
+(47, 'Coach sportif collec', 16),
+(48, 'Coach sportif person', 16),
+(50, 'Plomberie générale ', 20),
+(51, 'Chauffagiste', 20),
+(52, 'Differents montage ', 19),
+(53, 'Réparation ', 19),
+(54, 'Informatique ', 0),
+(55, 'Installation réseaux', 54),
+(56, 'Maitenance Informati', 54),
+(57, 'Création site Web', 54),
+(58, 'Infographie', 54),
+(59, 'Eléctricité Bâtiment', 22),
+(60, 'Réparation Eléctriqu', 22),
+(61, 'Traitement pelouse', 21),
+(62, 'Traitement sellectif', 21),
+(63, 'Ramassage de feuille', 21),
+(64, 'Tonte', 21);
 
 -- --------------------------------------------------------
 
@@ -126,27 +165,28 @@ CREATE TABLE IF NOT EXISTS `config_general` (
 --
 
 CREATE TABLE IF NOT EXISTS `membre` (
+  `id_membre` int(11) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
   `type` varchar(20) NOT NULL,
   `mail` varchar(80) NOT NULL,
   `passe` varchar(80) NOT NULL,
-  PRIMARY KEY (`mail`)
+  PRIMARY KEY (`id_membre`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `membre`
 --
 
-INSERT INTO `membre` (`nom`, `prenom`, `type`, `mail`, `passe`) VALUES
-('saidane', 'jawher', 'u', 'jawhersaidane94@gmail.com', 'cca0a4c0fe63fd729b12be5e6ef1a0fc'),
-('nbje', 'bjebdfj', 'u', 'nkjenbd', 'd41d8cd98f00b204e9800998ecf8427e'),
-('bennani', 'abdou', 'u', 'abdoubennani@gmail.com', '4124bc0a9335c27f086f24ba207a4912'),
-('abdou', 'bennani', 'u', 'benaniabdou@gmail.com', '4124bc0a9335c27f086f24ba207a4912'),
-('zaz', 'aza', 'p', 'azaz', 'd41d8cd98f00b204e9800998ecf8427e'),
-('aw', 'wds', 'u', 'wdsw', '4124bc0a9335c27f086f24ba207a4912'),
-('Jourdain', 'Stevens', 'u', 'jourdain.stevens@gmail.com', '5e0241833474874aedc706165005ca348ae7776b'),
-('Carrefour', 'feu', 'p', 'carrefour@mail.fr', '87731faef025a2d798005d9fc2b547537bae9c20');
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `type`, `mail`, `passe`) VALUES
+(0, 'saidane', 'jawher', 'u', 'jawhersaidane94@gmail.com', 'cca0a4c0fe63fd729b12be5e6ef1a0fc'),
+(1, 'nbje', 'bjebdfj', 'u', 'nkjenbd', 'd41d8cd98f00b204e9800998ecf8427e'),
+(2, 'bennani', 'abdou', 'u', 'abdoubennani@gmail.com', '4124bc0a9335c27f086f24ba207a4912'),
+(3, 'abdou', 'bennani', 'u', 'benaniabdou@gmail.com', '4124bc0a9335c27f086f24ba207a4912'),
+(4, 'zaz', 'aza', 'p', 'azaz', 'd41d8cd98f00b204e9800998ecf8427e'),
+(5, 'aw', 'wds', 'u', 'wdsw', '4124bc0a9335c27f086f24ba207a4912'),
+(6, 'Jourdain', 'Stevens', 'u', 'jourdain.stevens@gmail.com', '5e0241833474874aedc706165005ca348ae7776b'),
+(7, 'Carrefour', 'feu', 'p', 'carrefour@mail.fr', '87731faef025a2d798005d9fc2b547537bae9c20');
 
 -- --------------------------------------------------------
 
@@ -187,6 +227,7 @@ INSERT INTO `message` (`id_message`, `message`, `pseudo`, `destinataire`, `etat`
 
 CREATE TABLE IF NOT EXISTS `note` (
   `id_note` int(20) NOT NULL AUTO_INCREMENT,
+  `id_membre` int(11) NOT NULL,
   `id_service` varchar(20) NOT NULL,
   `note` varchar(5) NOT NULL,
   `commentaire` text NOT NULL,
@@ -197,12 +238,12 @@ CREATE TABLE IF NOT EXISTS `note` (
 -- Contenu de la table `note`
 --
 
-INSERT INTO `note` (`id_note`, `id_service`, `note`, `commentaire`) VALUES
-(1, '1', '4', '0'),
-(2, '1', '4', '0'),
-(3, '5', '4', '0'),
-(4, '5', '4', '0'),
-(5, '5', '2', '0');
+INSERT INTO `note` (`id_note`, `id_membre`, `id_service`, `note`, `commentaire`) VALUES
+(1, 0, '1', '4', 'Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l''imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.'),
+(2, 0, '1', '4', 'On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. '),
+(3, 0, '5', '4', 'Contrairement à une opinion répandue, le Lorem Ipsum n''est pas simplement du texte aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine classique datant de 45 av. J.-C., le rendant vieux de 2000 ans.'),
+(4, 0, '5', '4', 'Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d''entre elles a été altérée par l''addition d''humour ou de mots aléatoires qui ne ressemblent pas une seconde à du texte standard.'),
+(5, 0, '5', '2', 'L''extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle est reproduit ci-dessous pour les curieux. Les sections 1.10.32 et 1.10.33 du "De Finibus Bonorum et Malorum" de Cicéron sont aussi reproduites dans leur version originale, accompagnée de la traduction anglaise de H. Rackham (1914).');
 
 -- --------------------------------------------------------
 
