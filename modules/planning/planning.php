@@ -5,7 +5,7 @@ define('APPLICATION_NAME', 'Calendar');
 define('CREDENTIALS_PATH', 'modules/token.json');
 define('CLIENT_SECRET_PATH', 'modules/client_secret.json');
 define('SCOPES', implode(' ', array(
-  Google_Service_Calendar::CALENDAR_READONLY)
+  Google_Service_Calendar::CALENDAR)
 ));
 
 class Planning
@@ -28,10 +28,17 @@ class Planning
 		}
 
 	    if (isset($_GET['code'])) {
-	        $client->authenticate($_GET['code']);
-	        file_put_contents(CREDENTIALS_PATH, $client->getAccessToken());
-	        header('Location: index.php');
-	        exit;
+	    	try
+	    	{
+	    		$client->authenticate($_GET['code']);
+	        	file_put_contents(CREDENTIALS_PATH, json_encode($client->getAccessToken()));	       
+	        	header('Location: index.php');
+	        	exit;
+	    	}
+	    	catch(Exception $e)
+	    	{
+	    		die('Erreur token :'.$e->getMessage());
+	    	}	        
 	    }
 
   		// Load previously authorized credentials from a file.
@@ -45,6 +52,7 @@ class Planning
 	            $authUrl = $client->createAuthUrl();
 	            printf("Open the following link in your browser:\n<a href=\"%s\">%s</a>\n", $authUrl, $authUrl);
 	            print 'Enter verification code: ';
+	            exit;
 	        }
 	        catch(Exception $e)
 	        {
@@ -55,8 +63,15 @@ class Planning
 
 		// Refresh the token if it's expired.
 		if ($client->isAccessTokenExpired()) {
-			$client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-			file_put_contents(CREDENTIALS_PATH, $client->getAccessToken());
+			try
+			{
+				$client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+				file_put_contents(CREDENTIALS_PATH, json_encode($client->getAccessToken()));
+			}
+			catch(Exception $e)
+			{
+				die('Refresh token : '.$e->getMessage());
+			}			
 		}
 		
 		$this->service = new Google_Service_Calendar($client);
@@ -96,5 +111,5 @@ class Planning
 	}
 }
 
-//$planning = new Planning();
+$planning = new Planning();
 ?>
