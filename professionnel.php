@@ -19,8 +19,8 @@ if(isset($user) && $user['type'] != 'p')
 // On récupère les données
 try
 {
-    $req = $bdd->prepare('SELECT id, creneau FROM calendar WHERE id_membre = :idMembre');
-    $req->bindParam(':idMembre', $user['id_membre']);
+    $req = $bdd->prepare('SELECT id, creneau FROM calendar WHERE id_service = :idService');
+    $req->bindParam(':idService', $_GET['idService']);
     $req->execute();
     $data = $req->fetch(PDO::FETCH_ASSOC);
 

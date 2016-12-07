@@ -109,26 +109,28 @@
                 $('#liste_region').hide();
             }
         </script>
-        <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: '',
-                    center: 'prev title next',
-                    right: ''
-                },
-                eventClick:  function(event, jsEvent, view) {
-                    $('#modalTitle').html(event.title);
-                    $('#modalBody').html(event.description);
-                    $('#eventUrl').attr('href',event.url);
-                    $('#fullCalModal').modal();
-                    return false;
-                },
-                events:[
-                  <?= $_SESSION['calendar']; ?>
-                ]
+        <?php if(isset($idCalendrier)) : ?>
+            <script>
+            $(document).ready(function() {
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: '',
+                        center: 'prev title next',
+                        right: ''
+                    },
+                    eventClick:  function(event, jsEvent, view) {
+                        $('#modalTitle').html(event.title);
+                        $('#modalBody').html(event.description);
+                        $('#eventUrl').attr('href',event.url);
+                        $('#fullCalModal').modal();
+                        return false;
+                    },
+                    events:[
+                      <?= $planning->getCalendar($idCalendrier); ?>
+                    ]
+                });
             });
-        });
-    </script>
+            </script>
+        <?php endif; ?>
     </body>
 </html> 

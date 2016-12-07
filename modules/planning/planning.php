@@ -1,14 +1,12 @@
 <?php 
-require '../google-api/vendor/autoload.php';
+require 'modules/google-api/vendor/autoload.php';
 
 define('APPLICATION_NAME', 'Calendar');
-define('CREDENTIALS_PATH', '/modules/token.json');
-define('CLIENT_SECRET_PATH', '/modules/client_secret.json');
+define('CREDENTIALS_PATH', 'modules/token.json');
+define('CLIENT_SECRET_PATH', 'modules/client_secret.json');
 define('SCOPES', implode(' ', array(
   Google_Service_Calendar::CALENDAR_READONLY)
 ));
-
-session_start();
 
 class Planning
 {
@@ -31,14 +29,14 @@ class Planning
 
 	    if (isset($_GET['code'])) {
 	        $client->authenticate($_GET['code']);
-	        $_SESSION['access_token'] = $client->getAccessToken();
+	        file_put_contents(CREDENTIALS_PATH, $client->getAccessToken());
 	        header('Location: index.php');
 	        exit;
 	    }
 
   		// Load previously authorized credentials from a file.
-	    if(isset($_SESSION) && isset($_SESSION['access_token']))
-	        $client->setAccessToken($_SESSION['access_token']);
+	    if(file_exists(CREDENTIALS_PATH))
+	        $client->setAccessToken(file_get_contents(CREDENTIALS_PATH));
 	    else
 	    {
 	        // Request authorization from the user.
@@ -58,21 +56,20 @@ class Planning
 		// Refresh the token if it's expired.
 		if ($client->isAccessTokenExpired()) {
 			$client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-			$_SESSION['access_token'] = $client->getAccessToken();
+			file_put_contents(CREDENTIALS_PATH, $client->getAccessToken());
 		}
 		
 		$this->service = new Google_Service_Calendar($client);
 		$this->client = $client;
 	}
 
-	function ajouterRDV($calendarID, $RDV)
+	function ajouterRDV($data, $user)
 	{
 		
 	}
 
 	function getCalendar($calendarId)
-	{		
-		$calendarId = '0vbnir6qjaui60vhlbdpulrbbk@group.calendar.google.com';
+	{
 		$optParams = array(
 		  'maxResults'      => 10,
 		  'orderBy'         => 'startTime',
@@ -95,9 +92,9 @@ class Planning
 		    $str .= "},\n";
 		endforeach;
 
-		$_SESSION['calendar'] = $str;
+		return $str;
 	}
 }
 
-
+//$planning = new Planning();
 ?>
