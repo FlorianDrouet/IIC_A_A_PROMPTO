@@ -20,7 +20,7 @@ if(isset($user) && $user['type'] != 'p')
 try
 {
     $req = $bdd->prepare('SELECT id, creneau FROM calendar WHERE id_membre = :idMembre');
-    $req->bindParam(':id', $user['id_membre']);
+    $req->bindParam(':idMembre', $user['id_membre']);
     $req->execute();
     $data = $req->fetch(PDO::FETCH_ASSOC);
 }
@@ -33,18 +33,20 @@ catch(Exception $e)
 // Si des données sont postés
 if(isset($_POST) && isset($_POST['submit']))
 {
-    if(isset($_POST['idAgenda']) && !empty($_POST['idAgenda']) && isset($_POST['heure']) && !empty($_POST['heure']) && isset($_POST['minute']) && !empty($_POST['minute']))
+    if(isset($_POST['idAgenda']) && !empty($_POST['idAgenda']) && isset($_POST['heure']) && isset($_POST['minute']))
     {
         try
         {
-            if($data)
+            if(!$req->rowCount())
                 $req = $bdd->prepare('INSERT INTO calendar (id, id_membre, creneau) VALUE (:idAgenda, :idMembre, :creneau)');
             else
                 $req = $bdd->prepare('UPDATE calendar SET id = :idAgenda, creneau = :creneau WHERE id_membre = :idMembre');
 
+            $creneau = ($_POST['heure'] * 60) + $_POST['minute'];
+
             $req->bindParam(':creneau', $creneau);
-            $req->bindParam(':creneau', $creneau);
-            $req->bindParam(':creneau', $creneau);
+            $req->bindParam(':idMembre', $user['id_membre']);
+            $req->bindParam(':idAgenda', $_POST['idAgenda']);
 
             $req->execute();
         }
@@ -68,32 +70,34 @@ require 'include/header.php';
     <div class="container" style="padding-top: 70px">
         <div class="row">   
         <?= isset($msg) ? $msg : ''; ?>
-            <div class="col-xs-12">
-                <div class="col-sm-12 mt">
-                    <div class="input-field">
-                        <label for="class">Votre agenda google</label>
-                        <input name="idAgenda" type="text" class="form-control" placeholder="quelquechose@group.calendar.google.com" />
-                    </div>
-                </div>
-                <div class="col-sm-12 mt">
-                    <div class="input-field">
-                        <label for="class">Durée de vos créneaux</label>
-                        <select name="heure">
-                            <?php for($i = 0; $i < 8; $i++) : ?>
-                                <option value="<?= $i; ?>"><?= $i; ?>h</option>
-                            <?php endfor; ?>
-                        </select>
-                        <select name="minute">
-                            <?php for($i = 0; $i < 4; $i++) : ?>
-                                <option value="<?= ($i*15); ?>"><?= ($i*15); ?></option>
-                            <?php endfor; ?>
-                        </select>
-                    </div>
-                </div>                
+            <form method="POST" action ="">
                 <div class="col-xs-12">
-                    <input type="submit" name="submit" class="btn btn-primary btn-block" value="Enregistrer">
+                    <div class="col-sm-12 mt">
+                        <div class="input-field">
+                            <label for="class">Votre agenda google</label>
+                            <input name="idAgenda" type="text" class="form-control" placeholder="quelquechose@group.calendar.google.com" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mt">
+                        <div class="input-field">
+                            <label for="class">Durée de vos créneaux</label>
+                            <select name="heure">
+                                <?php for($i = 0; $i < 8; $i++) : ?>
+                                    <option value="<?= $i; ?>"><?= $i; ?>h</option>
+                                <?php endfor; ?>
+                            </select>
+                            <select name="minute">
+                                <?php for($i = 0; $i < 4; $i++) : ?>
+                                    <option value="<?= ($i*15); ?>"><?= ($i*15); ?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
+                    </div>                
+                    <div class="col-xs-12">
+                        <input type="submit" name="submit" class="btn btn-primary btn-block" value="Enregistrer">
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="row" style="margin-top:20px;">
             <div class="col-xs-12">
