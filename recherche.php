@@ -58,7 +58,7 @@ require 'modules/notation/notation.php';
 						<div class="one-4">
 							<img src="images/car-4.jpg" height="150" width="150" class="img-circle">
 							 <h4 style="padding-left: 30px">Avis :  <?php 
-							 afficherNote($i+1); ?></h4>
+							 afficherNote($i+1, false); ?></h4>
 						</div>
 						<div class="one-1" style="background-image: url(images/car-5.jpg);">
 						<div class="col-md-offset-2" style="padding-top: 1cm">
