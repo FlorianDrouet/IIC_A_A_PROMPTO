@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4deb1
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:3306
--- Généré le :  Mar 06 Décembre 2016 à 20:00
--- Version du serveur :  5.7.16-0ubuntu0.16.10.1
--- Version de PHP :  7.0.8-3ubuntu3
+-- Client :  127.0.0.1
+-- Généré le :  Mer 07 Décembre 2016 à 16:03
+-- Version du serveur :  5.7.14
+-- Version de PHP :  5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,6 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `bon_plan` (
   `id_service` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `calendar`
+--
+
+CREATE TABLE `calendar` (
+  `id` text NOT NULL,
+  `id_membre` int(11) NOT NULL,
+  `creneau` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
