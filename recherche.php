@@ -30,7 +30,7 @@ require 'modules/notation/notation.php';
 		</div>
 		<h3>Resulat de votre recherche</h3>
 		<div class="row row-bottom-padded-md">
-			<?php if(isset($recherche)) : ?>
+			<?php if(isset($recherche) && $recherche) : ?>
 				<?php foreach ($recherche as $rs) : ?>
 					<div class="col-md-6 animate-box">
 						<div class="car">
@@ -52,27 +52,11 @@ require 'modules/notation/notation.php';
 					</div>
 				<?php endforeach; ?>
 			<?php else : ?>
-				<?php for($i = 0; $i < 6; $i++) : ?> 
-				<div class="col-md-6 animate-box">
-					<div class="car">
-						<div class="one-4">
-							<img src="images/car-4.jpg" height="150" width="150" class="img-circle">
-							 <h4 style="padding-left: 30px">Avis :  <?php 
-							 afficherNote($i+1, false); ?></h4>
-						</div>
-						<div class="one-1" style="background-image: url(images/car-5.jpg);">
-						<div class="col-md-offset-2" style="padding-top: 1cm">
-						<label style="color: white">NOM : </label><br>
-						<label style="color: white">Prenom : </label><br>
-						<label style="color: white">Description : </label><br>
-						
-						<a class="btn btn-primary btn-outline" <?= !isset($user) ? 'onclick="alert(\'Veuilllez vous connecter.\'); return false;"' : ''; ?> href="#">Demander un devis <i class="icon-arrow-right22"></i></a>
-						<a class="btn btn-primary btn-outline" <?= !isset($user) ? 'onclick="alert(\'Veuilllez vous connecter.\'); return false;"' : ''; ?> href="contacter_professionnel.php?professionnel=Coiffeur">Contacter <i class="icon-arrow-right22"></i></a>
-						</div>
-						</div>
-					</div>
-				</div>
-				<?php endfor; ?>	
+				<?php if(!isset($_GET) || (isset($_GET) && !isset($_GET['service']))) : ?>
+					<p>Veuillez effectuer votre recherche.</p>
+				<?php else : ?>
+					<p>Votre recherche n'est pas concluante, si vous le souhaitez, vous pouvez nous contacter en cliquant sur ce lien : <a href="index.php#Contact">Nous contacter</a></p>
+				<?php endif; ?>
 			<?php endif; ?>			
 		</div>
 	</div>
