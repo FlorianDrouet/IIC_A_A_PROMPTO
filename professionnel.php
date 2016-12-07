@@ -1,15 +1,78 @@
-<?php $title = "Votre agenda"; 
+<?php 
 
+require 'include/session.php';
+
+// S'il n'est pas connecté
+if(!isset($user))
+{
+    header('location: index.php');
+    exit;
+}
+
+// S'il n'est pas un professionnel
+if(isset($user) && $user['type'] != 'p')
+{
+    header('location: index.php');
+    exit;
+}
+
+// On récupère les données
+try
+{
+    $req = $bdd->prepare('SELECT id, creneau FROM calendar WHERE id_membre = :idMembre');
+    $req->bindParam(':id', $user['id_membre']);
+    $req->execute();
+    $data = $req->fetch(PDO::FETCH_ASSOC);
+}
+catch(Exception $e)
+{
+    die('Req select agenda : '.$e->getMessage());
+}
+
+
+// Si des données sont postés
+if(isset($_POST) && isset($_POST['submit']))
+{
+    if(isset($_POST['idAgenda']) && !empty($_POST['idAgenda']) && isset($_POST['heure']) && !empty($_POST['heure']) && isset($_POST['minute']) && !empty($_POST['minute']))
+    {
+        try
+        {
+            if($data)
+                $req = $bdd->prepare('INSERT INTO calendar (id, id_membre, creneau) VALUE (:idAgenda, :idMembre, :creneau)');
+            else
+                $req = $bdd->prepare('UPDATE calendar SET id = :idAgenda, creneau = :creneau WHERE id_membre = :idMembre');
+
+            $req->bindParam(':creneau', $creneau);
+            $req->bindParam(':creneau', $creneau);
+            $req->bindParam(':creneau', $creneau);
+
+            $req->execute();
+        }
+        catch(Exception $e)
+        {
+            die('Req select agenda : '.$e->getMessage());
+        }
+
+        $msg = 'Les données ont été enregistrées.';
+    }
+    else
+        $msg = "Erreur formulaire";
+}
+
+$sessionInclude = true;
+$title = "Votre agenda";
 require 'include/header.php';
+
 ?>
 <div id="fh5co-car" class="fh5co-section-gray">
     <div class="container" style="padding-top: 70px">
         <div class="row">   
+        <?= isset($msg) ? $msg : ''; ?>
             <div class="col-xs-12">
                 <div class="col-sm-12 mt">
                     <div class="input-field">
                         <label for="class">Votre agenda google</label>
-                        <input name="idAgenda" type="text" class="form-control" id="" placeholder="quelquechose@group.calendar.google.com" />
+                        <input name="idAgenda" type="text" class="form-control" placeholder="quelquechose@group.calendar.google.com" />
                     </div>
                 </div>
                 <div class="col-sm-12 mt">
@@ -28,7 +91,7 @@ require 'include/header.php';
                     </div>
                 </div>                
                 <div class="col-xs-12">
-                    <input type="submit" class="btn btn-primary btn-block" value="Enregistrer">
+                    <input type="submit" name="submit" class="btn btn-primary btn-block" value="Enregistrer">
                 </div>
             </div>
         </div>
