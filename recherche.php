@@ -45,7 +45,7 @@ require 'modules/notation/notation.php';
 									<label style="color: white"><?= $geolocalisation->distToStr($geolocalisation->distance($rs['longitude'], $rs['lattitude'])); ?></label><br>								
 									<label style="color: white"><?= $rs['description']; ?></label><br>
 									
-									<a class="btn btn-primary btn-outline" <?= !isset($user) ? 'onclick="alert(\'Veuillez vous connecter.\'); return false;"' : ''; ?> href="client.php">Prendre un rendez-vous <i class="icon-arrow-right22"></i></a>
+									<a class="btn btn-primary btn-outline" <?= !isset($user) ? 'onclick="alert(\'Veuillez vous connecter.\'); return false;"' : ''; ?> href="client.php?idService=<?= $rs['id_service']; ?>">Prendre un rendez-vous <i class="icon-arrow-right22"></i></a>
 								</div>
 							</div>
 						</div>

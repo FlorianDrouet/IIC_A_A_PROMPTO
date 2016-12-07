@@ -59,7 +59,7 @@ foreach($all_services AS $d => $array)
 						<?php 
 						 foreach($services AS $service): ?>
 						<li class="one-forth text-center" style="background-image: url(images/place-<?= $i%9 +1; ?>.jpg); ">
-							<a <?= !isset($user) ? 'onclick="alert(\'Veuillez-vous connecter.\'); return false;"' : ''; ?> href="client.php">
+							<a <?= !isset($user) ? 'onclick="alert(\'Veuillez-vous connecter.\'); return false;"' : ''; ?> href="client.php?idService=<?= $service['id_service']; ?>">
 								<div class="case-studies-summary">
 									<h2><?= $service['nom']; ?></h2>
 									<h4><?= $geolocalisation->distToStr($service['distance']); ?></h4>
