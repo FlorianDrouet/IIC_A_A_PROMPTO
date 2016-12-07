@@ -23,6 +23,12 @@ try
     $req->bindParam(':idMembre', $user['id_membre']);
     $req->execute();
     $data = $req->fetch(PDO::FETCH_ASSOC);
+
+    if($req->rowCount()){
+        $idCalendrier = $data['id'];
+        $heure = ceil($data['creneau'] / 60);
+        $minute = $data['creneau'] % 60;
+    }
 }
 catch(Exception $e)
 {
@@ -49,6 +55,10 @@ if(isset($_POST) && isset($_POST['submit']))
             $req->bindParam(':idAgenda', $_POST['idAgenda']);
 
             $req->execute();
+
+            $idCalendrier = $_POST['idAgenda'];
+            $minute = $_POST['heure'];
+            $heure = $_POST['minute'];
         }
         catch(Exception $e)
         {
@@ -75,7 +85,7 @@ require 'include/header.php';
                     <div class="col-sm-12 mt">
                         <div class="input-field">
                             <label for="class">Votre agenda google</label>
-                            <input name="idAgenda" type="text" class="form-control" placeholder="quelquechose@group.calendar.google.com" />
+                            <input name="idAgenda" type="text" class="form-control" <?= isset($idCalendrier) ? 'value="'.$idCalendrier.'"' : ''; ?> placeholder="quelquechose@group.calendar.google.com" />
                         </div>
                     </div>
                     <div class="col-sm-12 mt">
@@ -83,12 +93,12 @@ require 'include/header.php';
                             <label for="class">Durée de vos créneaux</label>
                             <select name="heure">
                                 <?php for($i = 0; $i < 8; $i++) : ?>
-                                    <option value="<?= $i; ?>"><?= $i; ?>h</option>
+                                    <option <?= isset($heure) && $i == $heure ? 'SELECTED' : ''; ?> value="<?= $i; ?>"><?= $i; ?>h</option>
                                 <?php endfor; ?>
                             </select>
                             <select name="minute">
                                 <?php for($i = 0; $i < 4; $i++) : ?>
-                                    <option value="<?= ($i*15); ?>"><?= ($i*15); ?></option>
+                                    <option <?= isset($minute) && $i == $minute ? 'SELECTED' : ''; ?>  value="<?= ($i*15); ?>"><?= ($i*15); ?></option>
                                 <?php endfor; ?>
                             </select>
                         </div>
