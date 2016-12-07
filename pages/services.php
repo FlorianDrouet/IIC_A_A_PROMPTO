@@ -1,7 +1,9 @@
 <?php
 
+$maxAngle = 0.25;
+
 // On récupère les 8 services les plus proches
-$query = 'SELECT * FROM service WHERE longitude >= '.($geolocalisation->long-1).' AND longitude <= '.($geolocalisation->long+1).' AND lattitude >= '.($geolocalisation->lat-1).' AND lattitude <= '.($geolocalisation->lat+1);
+$query = 'SELECT * FROM service WHERE longitude >= '.($geolocalisation->long-$maxAngle).' AND longitude <= '.($geolocalisation->long+$maxAngle).' AND lattitude >= '.($geolocalisation->lat-$maxAngle).' AND lattitude <= '.($geolocalisation->lat+$maxAngle);
 $req = $bdd->prepare($query);
 $req->execute();
 
@@ -57,7 +59,7 @@ foreach($all_services AS $d => $array)
 						<?php 
 						 foreach($services AS $service): ?>
 						<li class="one-forth text-center" style="background-image: url(images/place-<?= $i%9 +1; ?>.jpg); ">
-							<a href="recherche.php">
+							<a <?= !isset($user) ? 'onclick="alert(\'Veuillez-vous connecter.\'); return false;"' : ''; ?> href="client.php">
 								<div class="case-studies-summary">
 									<h2><?= $service['nom']; ?></h2>
 									<h4><?= $geolocalisation->distToStr($service['distance']); ?></h4>
