@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 07 Décembre 2016 à 16:03
+-- Généré le :  Mer 07 Décembre 2016 à 21:17
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -38,9 +38,36 @@ CREATE TABLE `bon_plan` (
 
 CREATE TABLE `calendar` (
   `id` text NOT NULL,
-  `id_membre` int(11) NOT NULL,
+  `id_service` int(11) NOT NULL,
   `creneau` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `calendar`
+--
+
+INSERT INTO `calendar` (`id`, `id_service`, `creneau`) VALUES
+('jourdain.stevens@gmail.com', 7, 120),
+('jourdain.stevens@gmail.com', 4, 120),
+('jourdain.stevens@gmail.com', 5, 120),
+('jourdain.stevens@gmail.com', 6, 120),
+('jourdain.stevens@gmail.com', 8, 120),
+('jourdain.stevens@gmail.com', 9, 120),
+('jourdain.stevens@gmail.com', 10, 120),
+('jourdain.stevens@gmail.com', 11, 120),
+('jourdain.stevens@gmail.com', 12, 120),
+('jourdain.stevens@gmail.com', 13, 120),
+('jourdain.stevens@gmail.com', 14, 120),
+('jourdain.stevens@gmail.com', 15, 120),
+('jourdain.stevens@gmail.com', 16, 120),
+('jourdain.stevens@gmail.com', 17, 120),
+('jourdain.stevens@gmail.com', 18, 120),
+('jourdain.stevens@gmail.com', 19, 120),
+('jourdain.stevens@gmail.com', 20, 120),
+('jourdain.stevens@gmail.com', 21, 120),
+('jourdain.stevens@gmail.com', 22, 120),
+('jourdain.stevens@gmail.com', 23, 120),
+('jourdain.stevens@gmail.com', 24, 120);
 
 -- --------------------------------------------------------
 
@@ -207,35 +234,36 @@ CREATE TABLE `service` (
   `categorie` int(11) NOT NULL,
   `longitude` double NOT NULL,
   `lattitude` double NOT NULL,
-  `region` varchar(20) NOT NULL
+  `region` varchar(20) NOT NULL,
+  `id_membre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `service`
 --
 
-INSERT INTO `service` (`id_service`, `nom`, `description`, `categorie`, `longitude`, `lattitude`, `region`) VALUES
-(4, 'Coach sportif', 'JE suis le meilleur coach sportif', 0, 0, 0, ''),
-(5, 'Coiffeuse', '', 9, 4.0581077, 49.243463399999996, 'paris'),
-(6, 'Coiffeur', '', 9, 4.0581077, 49.243463399999996, 'reims'),
-(7, 'Esthéticienne', '', 9, 4.0581077, 49.243463399999996, ''),
-(8, 'Plombier X', '', 20, 4.701077, 49.2424, ''),
-(9, 'Plombier Y', '', 20, 4.1215, 68.124845, ''),
-(10, 'Plombier Z', '', 20, 4.0581077, 49.243463399999996, ''),
-(11, 'Electricien A', '', 22, 48.12343, 5.262, ''),
-(12, 'Electricien B', '', 22, 12.45418, 8.56746, ''),
-(13, 'Plombier C', '', 22, 4.701077, 49.243463399999996, ''),
-(14, 'Plombier D', '', 22, 4.058107722, 48.886566535235, ''),
-(15, 'Bus', '', 18, 4.0581077, 49.243463399999996, ''),
-(16, 'Taxi', '', 18, 4.058888, 49.85858583, ''),
-(17, 'Sushi à domicile', '', 17, 12.4545, 78.2455, ''),
-(18, 'Kebab à domicile', '', 17, 54.24545, 12.45475, ''),
-(19, 'Infirmier A', '', 10, 44.1212, 78.1214, ''),
-(20, 'Infirmier B', '', 10, 54.212, 7.2124, ''),
-(21, 'Aide à la personne', '', 10, 4.212, 7.212, ''),
-(22, 'Medecin à domicile', '', 10, 54.1214, 78.377, ''),
-(23, 'Jardinier A', '', 21, 9.242, 78.244, ''),
-(24, 'Jardinier B', '', 21, 7.242, 2.3234, '');
+INSERT INTO `service` (`id_service`, `nom`, `description`, `categorie`, `longitude`, `lattitude`, `region`, `id_membre`) VALUES
+(4, 'Coach sportif', 'JE suis le meilleur coach sportif', 0, 0, 0, '', 7),
+(5, 'Coiffeuse', '', 9, 4.0581077, 49.243463399999996, 'paris', 7),
+(6, 'Coiffeur', '', 9, 4.0581077, 49.243463399999996, 'reims', 7),
+(7, 'Esthéticienne', '', 9, 4.0581077, 49.243463399999996, '', 7),
+(8, 'Plombier X', '', 20, 4.701077, 49.2424, '', 7),
+(9, 'Plombier Y', '', 20, 4.1215, 68.124845, '', 7),
+(10, 'Plombier Z', '', 20, 4.0581077, 49.243463399999996, '', 7),
+(11, 'Electricien A', '', 22, 48.12343, 5.262, '', 7),
+(12, 'Electricien B', '', 22, 12.45418, 8.56746, '', 7),
+(13, 'Plombier C', '', 22, 4.701077, 49.243463399999996, '', 7),
+(14, 'Plombier D', '', 22, 4.058107722, 48.886566535235, '', 7),
+(15, 'Bus', '', 18, 4.0581077, 49.243463399999996, '', 7),
+(16, 'Taxi', '', 18, 4.058888, 49.85858583, '', 7),
+(17, 'Sushi à domicile', '', 17, 12.4545, 78.2455, '', 7),
+(18, 'Kebab à domicile', '', 17, 54.24545, 12.45475, '', 7),
+(19, 'Infirmier A', '', 10, 44.1212, 78.1214, '', 7),
+(20, 'Infirmier B', '', 10, 54.212, 7.2124, '', 7),
+(21, 'Aide à la personne', '', 10, 4.212, 7.212, '', 7),
+(22, 'Medecin à domicile', '', 10, 54.1214, 78.377, '', 7),
+(23, 'Jardinier A', '', 21, 9.242, 78.244, '', 7),
+(24, 'Jardinier B', '', 21, 7.242, 2.3234, '', 7);
 
 --
 -- Index pour les tables exportées
@@ -245,6 +273,12 @@ INSERT INTO `service` (`id_service`, `nom`, `description`, `categorie`, `longitu
 -- Index pour la table `bon_plan`
 --
 ALTER TABLE `bon_plan`
+  ADD PRIMARY KEY (`id_service`);
+
+--
+-- Index pour la table `calendar`
+--
+ALTER TABLE `calendar`
   ADD PRIMARY KEY (`id_service`);
 
 --
