@@ -78,9 +78,29 @@ class Planning
 		$this->client = $client;
 	}
 
-	function ajouterRDV($data, $user)
+	function ajouterRDV($data, $user, $calendarId, $creneau)
 	{
+		var_dump($data);
+
+		list($jour, $mois, $annee) = explode('/', $data['date']);
+
+		$data['heure']--;
+
+		$debut = new DateTime("$annee-$mois-$jour ".$data['heure'].':'.$data['minute'].":00");
+		$fin = new DateTime("$annee-$mois-$jour ".($data['heure'] + ceil($creneau/60)).':'.($data['minute'] + $creneau%60).":00");
+
+		$event = new Google_Service_Calendar_Event(array(
+		  'summary' => 'RDV avec '.$user['nom'].' '.$user['prenom'],
+		  'description' => 'RDV avec '.$user['nom'].' '.$user['prenom'],
+		  'start' => array(
+		    'dateTime' => $debut->format(DateTime::RFC3339)
+		  ),
+		  'end' => array(
+		    'dateTime' => $fin->format(DateTime::RFC3339)
+		  )
+		));
 		
+		$this->service->events->insert($calendarId, $event);
 	}
 
 	function getCalendar($calendarId)

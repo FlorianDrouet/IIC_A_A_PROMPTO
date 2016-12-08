@@ -19,8 +19,8 @@ Tâches à faire (avancement)
 |Recherche "intelligente"                                     | fait          |
 |Affichage du planning                                        | fait          |
 |Système de notification de nouveaux messages                 | pas commencé  |
-|Pouvoir réserver un créneau                                  | en cours      |
-|Synchronisation planning google agenda                       | en cours      |
+|Pouvoir réserver un créneau                                  | fait          |
+|Synchronisation planning google agenda                       | fait          |
 |Formulaire pour ajouter son google agenda                    | fait          |
 |Recherche en fonction de la date                             | pas commencé  |
 |Recherche en fonction de la géolocalisation                  | fait          |

@@ -11,7 +11,7 @@ if(!isset($user) || !isset($_GET['idService']))
 // On récupère le calendrier du service
 try
 {
-    $req = $bdd->prepare("SELECT c.id FROM calendar AS c LEFT JOIN service AS s ON s.id_service = c.id_service WHERE id_service=:idService");
+    $req = $bdd->prepare("SELECT c.id, c.creneau FROM calendar AS c LEFT JOIN service AS s ON s.id_service = c.id_service WHERE c.id_service=:idService");
     $req->bindParam(':idService', $_GET['idService']);
     $req->execute();
 
@@ -28,21 +28,23 @@ catch(Exception $e)
     die('sql get calendar : '.$e->getMessage());
 }
 
+$sessionInclude = true;
+$title = "Prendrez un rendez-vous";
+require 'include/header.php';
+
 // Gestion formulaire
 if(isset($_POST) && isset($_POST['submit']))
 {
     if(isset($_POST['date']) && !empty($_POST['date']) && isset($_POST['heure']) && isset($_POST['minute']))
     {
-        $planning->ajouterRDV($_POST, $user);
+        $planning->ajouterRDV($_POST, $user, $idCalendrier, $data['creneau']);
         $msg = 'Le rendez-vous a été pris.';
     }
     else
         $msg = "Erreur formulaire.";
 }
 
-$sessionInclude = true;
-$title = "Prendrez un rendez-vous";
-require 'include/header.php'; ?>
+?>
 <div id="fh5co-car" class="fh5co-section-gray">
     <div class="container" style="padding-top: 70px">
         <div class="row">
