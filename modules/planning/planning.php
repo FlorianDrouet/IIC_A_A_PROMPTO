@@ -21,6 +21,7 @@ class Planning
 		  $client->setScopes(SCOPES);
 		  $client->setAuthConfig(CLIENT_SECRET_PATH);
 		  $client->setAccessType('offline');
+		  $client->setApprovalPrompt ("force");
 		}
 		catch(Exception $e)
 		{
@@ -65,13 +66,32 @@ class Planning
 		if ($client->isAccessTokenExpired()) {
 			try
 			{
-				$client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-				file_put_contents(CREDENTIALS_PATH, json_encode($client->getAccessToken()));
+				$refreshTokenSaved = $client->getRefreshToken(); 
 			}
 			catch(Exception $e)
 			{
 				die('Refresh token : '.$e->getMessage());
-			}			
+			}
+
+			try
+			{
+				$client->fetchAccessTokenWithRefreshToken($refreshTokenSaved);
+			}
+			catch(Exception $e)
+			{
+				die('Refresh token2 : '.$e->getMessage());
+			}
+			try
+			{
+				$accessTokenUpdated = $client->getAccessToken();
+				$accessTokenUpdated['refresh_token'] = $refreshTokenSaved;
+				file_put_contents(CREDENTIALS_PATH, json_encode($accessTokenUpdated));
+			}
+			catch(Exception $e)
+			{
+				die('Refresh token3 : '.$e->getMessage());
+			}
+
 		}
 		
 		$this->service = new Google_Service_Calendar($client);
@@ -106,7 +126,7 @@ class Planning
 	function getCalendar($calendarId)
 	{
 		$optParams = array(
-		  'maxResults'      => 10,
+		  'maxResults'      => 150,
 		  'orderBy'         => 'startTime',
 		  'singleEvents'    => TRUE,
 		  'timeMin'         => date('c')
@@ -128,6 +148,63 @@ class Planning
 		endforeach;
 
 		return $str;
+	}
+
+	function dispoAujourdhui($calendarId, $creneau)
+	{
+		$optParams = array(
+		  'maxResults'      => 150,
+		  'orderBy'         => 'startTime',
+		  'singleEvents'    => TRUE,
+		  'timeMin'         => date('c')
+		);
+
+		$calendar = $this->service->events->listEvents($calendarId, $optParams);
+		$result = $calendar->getItems();
+
+		$isDispo = true;
+		$today = new DateTime();
+
+		$nb = $creneau;
+
+		foreach($result as $item)
+		{
+			$date = new DateTime($item->start->dateTime);
+			if($date->format('dd/MM/YYYY') == $today->format('dd/MM/YYYY'))
+			{
+				$isDispo = false;
+			}
+		}
+
+		return $isDispo;
+	}
+
+	function disponible($calendarId, $date, $creneau)
+	{
+		$optParams = array(
+		  'maxResults'      => 150,
+		  'orderBy'         => 'startTime',
+		  'singleEvents'    => TRUE,
+		  'timeMin'         => date('c')
+		);
+
+		$calendar = $this->service->events->listEvents($calendarId, $optParams);
+		$result = $calendar->getItems();
+
+		$isDispo = true;
+		$today = new DateTime($date);
+
+		foreach($result as $item)
+		{
+			$date = new DateTime($item->start->dateTime);
+			if($date->format('dd/MM/YYYY HH:ii') == $today->format('dd/MM/YYYY HH:ii'))
+			{
+				$isDispo = false;
+				break;
+			}
+		}
+
+		return $isDispo;
 	}
 }
 

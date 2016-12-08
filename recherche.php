@@ -18,16 +18,37 @@ if(isset($_GET['service']))
 require 'modules/notation/notation.php'; 
 ?>
 <div id="fh5co-car" class="fh5co-section-gray">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">				
-				<form action="" method="GET">
-					<input type="text" name="service" placeholder="Service" id="service_id" onkeyup="autocomplet()">
-	                    <ul id="liste_service" class="searchResult"></ul>
-					<button type="submit">Rechercher</button>
-				</form>
-			</div>
-		</div>
+	<div class="container">							
+		<form action="" method="GET">
+            <div style="overflow:hidden;">	                
+			    <div class="form-group">
+			    	<div class="row">			    		
+			        	<div class="col-md-6">
+							<input type="text" name="service" placeholder="Choix du service" id="service_id" onkeyup="autocomplet()">
+			                <ul id="liste_service" class="searchResult"></ul><br>
+			                <button type="submit">Rechercher</button>
+			             </div>
+			            <div class="col-md-6">
+			            	<input type="hidden" name="dateRDV" id="choixDate">
+			                <div id="selectCreneau"></div>
+			            </div>
+			        </div>
+			    </div>
+			    <script type="text/javascript">
+			        $(document).ready(function() {  
+			        	var $j = jQuery.noConflict();
+			            $j('#selectCreneau').datetimepicker({
+			                inline: true,
+			                sideBySide: false
+			            }).change = function(e)
+		                {
+		                	console.log(e);
+		                	$j('#choixDate').val(e.date);
+		                };
+			        });
+			    </script>
+			</div>			
+		</form>
 		<h3>Resulat de votre recherche</h3>
 		<div class="row row-bottom-padded-md">
 			<?php if(isset($recherche) && $recherche) : ?>
