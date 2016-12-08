@@ -22,7 +22,7 @@ Tâches à faire (avancement)
 |Pouvoir réserver un créneau                                  | fait          |
 |Synchronisation planning google agenda                       | fait          |
 |Formulaire pour ajouter son google agenda                    | fait          |
-|Recherche en fonction de la date                             | pas commencé  |
+|Recherche en fonction de la date                             | en cours      |
 |Recherche en fonction de la géolocalisation                  | fait          |
 |Mini chat instantanée                                        | en cours      |
 |Modification système de notification                         | fait          |
