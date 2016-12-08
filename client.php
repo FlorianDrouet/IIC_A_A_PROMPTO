@@ -53,7 +53,7 @@ if(isset($_POST) && isset($_POST['submit']))
                 <form method="POST" action=""> 
                     <div class="input-field">
                         <label for="date-start">Date du rendez-vous (Jour/Mois/Année => format : JJ/MM/AAAA)</label>
-                        <input type="text" class="form-control" name="date" placeholder="JJ/MM/AAAA"/>   
+                        <input type="text" class="form-control" name="date" id="dateRDV" placeholder="JJ/MM/AAAA"/>   
                     </div>      
                     <div class="input-field">
                         <label for="date-start">Choix horaire</label>
